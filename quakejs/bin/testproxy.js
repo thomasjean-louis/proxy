@@ -1,6 +1,6 @@
 var path = require('path');
 var fs = require('fs'); 
-var gms = 'https://localhost:27960';
+var gms = 'http://localhost:27960';
 
 var express = require('express');
 var app = express();
