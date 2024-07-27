@@ -10,6 +10,7 @@ RUN apt-get install  sudo -y
 RUN apt-get install  npm -y
 RUN apt-get install  jq -y
 RUN apt-get install  openssl -y
+RUN apt-get install  ssl-cert -y
 RUN apt-get install  apt-utils -y
 
 
