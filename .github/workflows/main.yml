@@ -17,7 +17,6 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: eu-west-3
-          role-to-assume: ${{ secrets.ARN_ROLE_TO_ASSUME }}
 
       - name: Login to Amazon ECR
         id: login-ecr
