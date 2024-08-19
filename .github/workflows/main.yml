@@ -33,16 +33,14 @@ jobs:
       #     docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
 
       #Update gameserver docker image tag
-      - env:
-          IMAGE_TAG: ${{ github.ref_name }}_${{ github.run_number }}
-        run: >
+      - run: >
           curl -L
           -X PATCH
           -H "Accept: application/vnd.github+json"
           -H "Authorization: Bearer ${{ secrets.TOKEN_GITHUB }}"
           -H "X-GitHub-Api-Version: 2022-11-28"
           https://api.github.com/repos/thomasjean-louis/infra/environments/${{ github.ref_name }}/variables/PROXY_SERVER_DOCKER_IMAGE
-          -d '{"name":"PROXY_SERVER_DOCKER_IMAGE","value":$IMAGE_TAG}'
+          -d '{"name":"PROXY_SERVER_DOCKER_IMAGE","value":"${{ github.ref_name }}_${{ github.run_number }}"}'
 
       # Launch infra workflow, to update proxy image used
       # - run: >
