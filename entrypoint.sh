@@ -1,13 +1,19 @@
 #!/bin/sh
 
-cd /var/www/html
-
 
 cd /quakejs
 
 # SSL
-make-ssl-cert generate-default-snakeoil --force-overwrite
-echo '{"key":"/etc/ssl/private/ssl-cert-snakeoil.key","cert":"/etc/ssl/certs/ssl-cert-snakeoil.pem"}' >> ./bin/wssproxy.json
+
+# Create private key / Certificate Signing REquest
+openssl req -new -newkey rsa:4096 -nodes \
+    -keyout server.key -out server.csr \
+    -subj "/C=US/ST=Denial/L=Springfield/O=Dis/CN=www.example.com"
+
+# Create self signed certificate
+openssl req -new -newkey rsa:4096 -days 365 -nodes -x509 \
+    -subj "/C=US/ST=Denial/L=Springfield/O=Dis/CN=www.example.com" \
+    -keyout server.key  -out server.cert
 
 node bin/proxy.js
 
